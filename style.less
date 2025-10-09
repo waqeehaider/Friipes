@@ -1,0 +1,139 @@
+@formClr: #10375C;
+@selectClr: #0D2C4A;
+@btnClr: #FF5722;
+
+
+.customText {
+  color: @formClr !important;
+}
+.navbar-nav {
+  li {
+    margin: 0 10px;
+  }
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 16px !important;
+}
+
+.carousel-indicators .active {
+  width: 40px !important;
+  background-color: @btnClr !important;
+}
+
+.form-select {
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='white' d='M3.204 5h9.592L8 10.481z'/%3e%3c/svg%3e") !important;
+    background-color: @selectClr !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.form-select:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.form-bg {
+  background-color: @formClr !important;
+  color: white !important;
+}
+.custom-select {
+  background-color: @selectClr !important;
+  color: white !important;
+}
+.customBtn {
+  background-color: @btnClr !important;
+  color: white !important;
+  border: none !important;
+}
+@media (min-width: 1200px) {
+  .custom-position {
+    position: relative;
+    left: 140px !important;
+    z-index: 1;
+    top: 64px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .position-btn {
+    position: absolute !important;
+  }
+}
+ 
+.custom-img {
+width: 90px !important;
+}
+
+
+
+
+
+// space carousel
+
+
+.carousel-space {
+    width: 1200px;
+    overflow-x: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    /* transition: transform 0.5s ease-in-out; */
+    align-items: stretch;
+
+}
+.slider {
+/* transition: transform 0.4s ease; */
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 29%;
+/* padding: 30px; */
+}
+.slider img {
+    width: 100%;
+}
+
+/* .slide.active {
+transform: scale(1.2);
+z-index: 2;
+} */
+
+@media screen and (max-width: 992px) {
+    .carousel-space {
+        width: 600px;
+        overflow: hidden;
+    }
+    .slider{
+        display: flex;
+        flex: 0 0 44% !important;
+    }
+}
+    @media screen and (max-width: 767px) {
+    .carousel-space {
+        width: 500px;
+        overflow: hidden;
+    }
+
+    .slider {
+        display: flex;
+        flex: 0 0 100% !important;
+    }
+    .slider img {
+        width: 100%;
+    }
+    }
+    @media screen and (max-width: 572px) {
+    .carousel-space {
+        width: 400px;
+        overflow: hidden;
+    }
+    .slider img {
+        width: 100%;
+    }
+}
+
+      
