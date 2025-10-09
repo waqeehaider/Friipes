@@ -72,6 +72,8 @@ width: 90px !important;
 
 
 
+
+
 // space carousel
 
 
@@ -137,3 +139,80 @@ z-index: 2;
 }
 
       
+
+
+//facility carousel 
+
+
+.carousel-facilities {
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .carousel-facility {
+        display: flex;
+        /* transition: transform 0.5s ease-in-out; */
+        align-items: center;
+      }
+      .slide-facility {
+        justify-content: center;
+        min-width: 100%;
+        /* user-select: none; */
+      }
+      .slide-facility img {
+        width: 100%;
+        /* display: block; */
+      }
+      @media screen and (max-width: 992px) {
+        .carousel-facilities {
+          width: 600px;
+          overflow: hidden;
+        }
+        .slide-facility {
+          display: flex;
+          flex: 0 0 48% !important;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        .carousel-facilities {
+          width: 500px;
+          overflow: hidden;
+        }
+        .slide-facility {
+          display: flex;
+          flex: 0 0 100% !important;
+        }
+        .slide-facility img {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 572px) {
+        .carousel-facilities {
+          width: 400px;
+          overflow: hidden;
+        }
+        .slide-facility img {
+          width: 100%;
+        }
+      }
+
+      .custom-indicator.active {
+        width: 4px !important;
+        height: 40px !important;
+        border-color: #ff5722 !important;
+        background-color: #ff5722 !important;
+        border: none !important;
+      }
+      .custom-indicator {
+        width: 4px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        border-color: #dfdfdf !important;
+        background-color: #dfdfdf !important;
+        border: none !important;
+      }
+      .indicate-btn.active {
+        background-color: #ff5722 !important;
+        color: white !important;
+        border: none !important;
+        transition: background-color 0.3s ease;
+      }

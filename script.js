@@ -3,8 +3,8 @@ arrow.style.transform = 'rotate(180deg)';
 
 
 
-      const nextBtn = document.querySelector(".next");
-      const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
 
 const leftArrow = document.querySelector('.prevBtnDark');
@@ -30,134 +30,242 @@ prevBtn.addEventListener('click', () => {
 }); 
 
 
+
+
+
      //Spaces Carousel
 
-    //   const track = document.querySelector(".carousel-track");
+      const track = document.querySelector(".carousel-track");
 
 
-    //   function getSlideWidth() {
-    //     return track.querySelector(".slider").offsetWidth;
-    //   }
-    //   let isMoving = false;
+      function getSlideWidth() {
+        return track.querySelector(".slider").offsetWidth;
+      }
+      let isMoving = false;
 
-    //   function updateActiveSlide() {
-    //     // Remove old active
-    //     Array.from(track.children).forEach((slide) => {
-    //       slide.style.transition = "transform 0.5s ease, opacity 0.5s ease";
-    //       slide.style.transform = "scale(1)"; // reset
-    //       slide.style.transition = "transform 0.5s ease-in-out"
-    //       // slide.style.opacity = "0.5"; // dull background slides
-    //     });
+      function updateActiveSlide() {
+        // Remove old active
+        Array.from(track.children).forEach((slide) => {
+          slide.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+          slide.style.transform = "scale(1)"; // reset
+          slide.style.transition = "transform 0.5s ease-in-out"
+          // slide.style.opacity = "0.5"; // dull background slides
+        });
 
-    //     // Default: 2nd slide is active
-    //     let activeIndex = 1;
-    //     // On small screens, 1st slide should be active
-    //     if (window.innerWidth <= 768) {
-    //       activeIndex = 0;
-    //     }
+        // Default: 2nd slide is active
+        let activeIndex = 1;
+        // On small screens, 1st slide should be active
+        if (window.innerWidth <= 768) {
+          activeIndex = 0;
+        }
 
-    //     const activeSlide = track.children[activeIndex];
-    //     if (activeSlide) {
-    //       activeSlide.style.transform = "scale(1.1)";
-    //       // activeSlide.style.opacity = "1"; // clear & focused
-    //     }
-    //   }
+        const activeSlide = track.children[activeIndex];
+        if (activeSlide) {
+          activeSlide.style.transform = "scale(1.1)";
+          // activeSlide.style.opacity = "1"; // clear & focused
+        }
+      }
 
-    //   //  Next button
-    //   nextBtn.addEventListener("click", () => {
-    //     if (isMoving) return;
-    //     isMoving = true;
-    //     const slideWidth = getSlideWidth();
-    //     track.style.transform = `translateX(-${slideWidth}px)`;
-    //     track.style.transition = "transform 0.5s ease-in-out";
+      //  Next button
+      nextBtn.addEventListener("click", () => {
+        if (isMoving) return;
+        isMoving = true;
+        const slideWidth = getSlideWidth();
+        track.style.transform = `translateX(-${slideWidth}px)`;
+        track.style.transition = "transform 0.5s ease-in-out";
 
-    //     track.addEventListener(
-    //       "transitionend",
-    //       () => {
-    //         track.appendChild(track.firstElementChild); // move first to last
-    //         track.style.transition = "none"; //. prevent the reset transition effect
-    //         track.style.transform = "translateX(0)"; //moving 1 slide at a time
-    //         updateActiveSlide(); // ✅ update immediately after reorder
-    //         isMoving = false;
-    //       },
-    //       { once: true }
-    //     );
-    //   });
-
-
+        track.addEventListener(
+          "transitionend",
+          () => {
+            track.appendChild(track.firstElementChild); // move first to last
+            track.style.transition = "none"; //. prevent the reset transition effect
+            track.style.transform = "translateX(0)"; //moving 1 slide at a time
+            updateActiveSlide(); // ✅ update immediately after reorder
+            isMoving = false;
+          },
+          { once: true }
+        );
+      });
 
 
-    //     rightArrow.addEventListener("click", () => {
-    //     if (isMoving) return;
-    //     isMoving = true;
-    //     const slideWidth = getSlideWidth();
-    //     track.style.transform = `translateX(-${slideWidth}px)`;
-    //     track.style.transition = "transform 0.5s ease-in-out";
 
-    //     track.addEventListener(
-    //       "transitionend",
-    //       () => {
-    //         track.appendChild(track.firstElementChild); // move first to last
-    //         track.style.transition = "none"; //. prevent the reset transition effect
-    //         track.style.transform = "translateX(0)"; //moving 1 slide at a time
-    //         updateActiveSlide(); // ✅ update immediately after reorder
-    //         isMoving = false;
-    //       },
-    //       { once: true }
-    //     );
-    //   });
 
-    //   //  Prev button
-    //   prevBtn.addEventListener("click", () => {
-    //     if (isMoving) return; // prevent double click
-    //     isMoving = true;
-    //     const slideWidth = getSlideWidth();
-    //     track.insertBefore(track.lastElementChild, track.firstElementChild);
-    //     track.style.transition = "none";
-    //     track.style.transform = `translateX(-${slideWidth}px)`; // shift immediately left
+        rightArrow.addEventListener("click", () => {
+        if (isMoving) return;
+        isMoving = true;
+        const slideWidth = getSlideWidth();
+        track.style.transform = `translateX(-${slideWidth}px)`;
+        track.style.transition = "transform 0.5s ease-in-out";
 
-    //     // Step 2: Animate back to 0
-    //     requestAnimationFrame(() => {
-    //       track.style.transition = "transform 0.5s ease-in-out";
-    //       track.style.transform = "translateX(0)";
-    //     });
-    //     track.addEventListener(
-    //       "transitionend",
-    //       () => {
-    //         updateActiveSlide(); // ✅ update here too
+        track.addEventListener(
+          "transitionend",
+          () => {
+            track.appendChild(track.firstElementChild); // move first to last
+            track.style.transition = "none"; //. prevent the reset transition effect
+            track.style.transform = "translateX(0)"; //moving 1 slide at a time
+            updateActiveSlide(); // ✅ update immediately after reorder
+            isMoving = false;
+          },
+          { once: true }
+        );
+      });
 
-    //         isMoving = false; // unlock again
-    //       },
-    //       { once: true }
-    //     );
-    //   });
+      //  Prev button
+      prevBtn.addEventListener("click", () => {
+        if (isMoving) return; // prevent double click
+        isMoving = true;
+        const slideWidth = getSlideWidth();
+        track.insertBefore(track.lastElementChild, track.firstElementChild);
+        track.style.transition = "none";
+        track.style.transform = `translateX(-${slideWidth}px)`; // shift immediately left
 
-    //         leftArrow.addEventListener("click", () => {
-    //     if (isMoving) return; // prevent double click
-    //     isMoving = true;
-    //     const slideWidth = getSlideWidth();
-    //     track.insertBefore(track.lastElementChild, track.firstElementChild);
-    //     track.style.transition = "none";
-    //     track.style.transform = `translateX(-${slideWidth}px)`; // shift immediately left
+        // Step 2: Animate back to 0
+        requestAnimationFrame(() => {
+          track.style.transition = "transform 0.5s ease-in-out";
+          track.style.transform = "translateX(0)";
+        });
+        track.addEventListener(
+          "transitionend",
+          () => {
+            updateActiveSlide(); // ✅ update here too
 
-    //     // Step 2: Animate back to 0
-    //     requestAnimationFrame(() => {
-    //       track.style.transition = "transform 0.5s ease-in-out";
-    //       track.style.transform = "translateX(0)";
-    //     });
-    //     track.addEventListener(
-    //       "transitionend",
-    //       () => {
-    //         updateActiveSlide(); // ✅ update here too
+            isMoving = false; // unlock again
+          },
+          { once: true }
+        );
+      });
 
-    //         isMoving = false; // unlock again
-    //       },
-    //       { once: true }
-    //     );
-    //   });
+            leftArrow.addEventListener("click", () => {
+        if (isMoving) return; // prevent double click
+        isMoving = true;
+        const slideWidth = getSlideWidth();
+        track.insertBefore(track.lastElementChild, track.firstElementChild);
+        track.style.transition = "none";
+        track.style.transform = `translateX(-${slideWidth}px)`; // shift immediately left
 
-    //   updateActiveSlide();
-    //   window.addEventListener("resize", updateActiveSlide); // resize the active slide index 1 on 768> larger screens
+        // Step 2: Animate back to 0
+        requestAnimationFrame(() => {
+          track.style.transition = "transform 0.5s ease-in-out";
+          track.style.transform = "translateX(0)";
+        });
+        track.addEventListener(
+          "transitionend",
+          () => {
+            updateActiveSlide(); // ✅ update here too
 
+            isMoving = false; // unlock again
+          },
+          { once: true }
+        );
+      });
+
+      updateActiveSlide();
+      window.addEventListener("resize", updateActiveSlide); // resize the active slide index 1 on 768> larger screens
+
+
+
+
+
+
+    // facilties carousel
+
+
+
+     const num = document.querySelector(".indicator-num");
+    num.style.transform = "rotate(270deg)";
+    num.style.transformOrigin = "center";
+
+    const trackFacility = document.querySelector(".carousel-facility");
+    const indicators = document.querySelectorAll(".custom-indicator");
+    const buttons = document.querySelectorAll(".indicate-btn");
+    let isMoving2 = false;
+
+    function getSlidersWidth() {
+      return trackFacility.querySelector(".slide-facility").offsetWidth;
+    }
+
+    const totalSlides = indicators.length;
+    let currentIndex = 0;
+    updateIndicators();
+
+    function updateIndicators() {
+      indicators.forEach((btn, i) => {
+        btn.classList.toggle("active", i === currentIndex);
+      });
+      buttons.forEach((btn, i) => {
+        btn.classList.toggle("active", i === currentIndex);
+      });
+
+      const numText = document.querySelector(".indicator-num p");
+      numText.innerHTML = `${String(currentIndex + 1).padStart(
+        2,
+        "0"
+      )}/ <span class="text-secondary">${String(totalSlides).padStart(
+        2,
+        "0"
+      )}</span>`;
+    }
+
+    // 👉 Shared function for movement
+    function goToSlide(i) {
+      if (isMoving2 || i === currentIndex) return;
+      isMoving2 = true;
+
+      const slideWidth = getSlidersWidth();
+      let diff = i - currentIndex;
+
+      if (diff > 0) {
+        trackFacility.style.transition = "transform 0.5s ease-in-out";
+        trackFacility.style.transform = `translateY(-${slideWidth * diff}px)`;
+
+        trackFacility.addEventListener(
+          "transitionend",
+          () => {
+            for (let j = 0; j < diff; j++) {
+              trackFacility.appendChild(trackFacility.firstElementChild);
+            }
+            trackFacility.style.transition = "none";
+            trackFacility.style.transform = "translateY(0)";
+            currentIndex = i;
+            updateIndicators();
+            isMoving2 = false;
+          },
+          { once: true }
+        );
+      } else {
+        diff = Math.abs(diff);
+        for (let j = 0; j < diff; j++) {
+          trackFacility.insertBefore(
+            trackFacility.lastElementChild,
+            trackFacility.firstElementChild
+          );
+        }
+        trackFacility.style.transition = "none";
+        trackFacility.style.transform = `translateY(-${slideWidth * diff}px)`;
+
+        requestAnimationFrame(() => {
+          trackFacility.style.transition = "transform 0.5s ease-in-out";
+          trackFacility.style.transform = "translateY(0)";
+        });
+
+        trackFacility.addEventListener(
+          "transitionend",
+          () => {
+            currentIndex = i;
+            updateIndicators();
+            isMoving2 = false;
+          },
+          { once: true }
+        );
+      }
+    }
+
+    // 👉 Click events for indicators and buttons
+    indicators.forEach((btn, i) => {
+      btn.addEventListener("click", () => goToSlide(i));
+    });
+    buttons.forEach((btn, i) => {
+      btn.addEventListener("click", () => goToSlide(i));
+    });
 
 
