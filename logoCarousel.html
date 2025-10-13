@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autoplay Infinite Multi Carousel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .logo-carousel {
+        width: 1200px;
+        overflow: hidden;
+      }
+
+      .logo-carousel-track {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        animation: scroll 5s linear infinite;
+      }
+
+      .logo-slide {
+        flex: 0 0 10%;
+      }
+
+      .logo-slide img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(
+            -50%
+          ); /* Moves half, because we duplicate slides */
+        }
+      }
+
+      @media screen and (max-width: 992px) {
+        .logo-carousel {
+          width: 600px;
+        }
+        .logo-slide {
+          flex: 0 0 19% !important;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .logo-carousel {
+          width: 500px;
+        }
+        .logo-slide {
+          flex: 0 0 39% !important;
+        }
+      }
+
+      @media screen and (max-width: 572px) {
+        .logo-carousel {
+          width: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 pt-5">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="logo-carousel">
+            <div class="logo-carousel-track">
+              <div class="logo-slide"><img src="images/Logo.svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (1).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (2).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (3).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (4).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (5).svg" /></div>
+
+              <div class="logo-slide"><img src="images/Logo.svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (1).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (2).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (3).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (4).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (5).svg" /></div>
+
+              <div class="logo-slide"><img src="images/Logo.svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (1).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (2).svg" /></div>
+              <div class="logo-slide"><img src="images/Logo (3).svg" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

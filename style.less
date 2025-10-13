@@ -309,3 +309,66 @@ z-index: 2;
           z-index: 1;
         }
       }
+
+
+
+
+      // logo carousel 
+
+            .logo-carousel {
+        width: 1200px;
+        overflow: hidden;
+      }
+
+      .logo-carousel-track {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        animation: scroll 9s linear infinite;
+      }
+
+      .logo-slide {
+        flex: 0 0 10%;
+      }
+
+      .logo-slide img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(
+            -50%
+          ); /* Moves half, because we duplicate slides */
+        }
+      }
+
+      @media screen and (max-width: 992px) {
+        .logo-carousel {
+          width: 600px;
+        }
+        .logo-slide {
+          flex: 0 0 19% !important;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .logo-carousel {
+          width: 500px;
+        }
+        .logo-slide {
+          flex: 0 0 39% !important;
+        }
+      }
+
+      @media screen and (max-width: 572px) {
+        .logo-carousel {
+          width: 400px;
+        }
+      }
