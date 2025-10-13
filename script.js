@@ -269,3 +269,124 @@ prevBtn.addEventListener('click', () => {
     });
 
 
+
+
+
+
+
+    // Gallery Slider
+
+
+
+
+
+    const galleryArrowright = document.querySelector(".rotArrowGallery");
+    const prevBtnGallery = document.querySelector(".prevBtnGallery");
+    const nextBtnGallery = document.querySelector(".nextBtnGallery");
+    const prevGallery = document.querySelector(".prev-gallery");
+    const GalleryTrack = document.querySelector(".gallery-carousel-track");
+
+    galleryArrowright.style.transform = "rotate(180deg)";
+    prevBtnGallery.style.transform = "rotate(180deg)";
+    prevBtnGallery.style.display = "none";
+    nextBtnGallery.style.display = "none";
+
+    galleryArrowright.addEventListener("click", () => {
+      galleryArrowright.style.display = "none";
+      nextBtnGallery.style.display = "block";
+      prevBtnGallery.style.display = "none";
+      prevGallery.style.display = "block";
+    });
+
+    prevGallery.addEventListener("click", () => {
+      prevGallery.style.display = "none";
+      prevBtnGallery.style.display = "block";
+      nextBtnGallery.style.display = "none";
+      galleryArrowright.style.display = "block";
+    });
+
+    let isMoving3 = false;
+
+    // Get width of a single slide
+    function getGallerySlideWidth() {
+      return GalleryTrack.querySelector(".gallery-slide").offsetWidth;
+    }
+
+    // Adjust active slide height
+    function updateActiveHeightSlide() {
+      Array.from(GalleryTrack.children).forEach((slide) => {
+        slide.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+        slide.style.height = "297.12px";
+      });
+
+      let activeIndex = window.innerWidth <= 768 ? 0 : 1;
+      const activeSlide = GalleryTrack.children[activeIndex];
+      if (activeSlide) activeSlide.style.height = "606px";
+    }
+
+    // -----------------------
+    // Function: Move NEXT ▶️
+    // -----------------------
+    function moveNext(toggleButtons = false) {
+      if (isMoving3) return;
+      isMoving3 = true;
+
+      const slideWidth = getGallerySlideWidth();
+      GalleryTrack.style.transition = "transform 0.5s ease-in-out";
+      GalleryTrack.style.transform = `translateX(-${slideWidth}px)`;
+
+      GalleryTrack.addEventListener(
+        "transitionend",
+        () => {
+          GalleryTrack.appendChild(GalleryTrack.firstElementChild);
+          GalleryTrack.style.transition = "none";
+          GalleryTrack.style.transform = "translateX(0)";
+          updateActiveHeightSlide();
+          isMoving3 = false;
+        },
+        { once: true }
+      );
+    }
+
+    // -----------------------
+    // Function: Move PREV ◀️
+    // -----------------------
+    function movePrev(toggleButtons = false) {
+      if (isMoving3) return;
+      isMoving3 = true;
+
+      const slideWidth = getGallerySlideWidth();
+      GalleryTrack.insertBefore(
+        GalleryTrack.lastElementChild,
+        GalleryTrack.firstElementChild
+      );
+
+      GalleryTrack.style.transition = "none";
+      GalleryTrack.style.transform = `translateX(-${slideWidth}px)`;
+
+      requestAnimationFrame(() => {
+        GalleryTrack.style.transition = "transform 0.5s ease-in-out";
+        GalleryTrack.style.transform = "translateX(0)";
+      });
+
+      GalleryTrack.addEventListener(
+        "transitionend",
+        () => {
+          updateActiveHeightSlide();
+          isMoving3 = false;
+        },
+        { once: true }
+      );
+    }
+
+    // -----------------------
+    // Attach listeners
+    // -----------------------
+    galleryArrowright.addEventListener("click", () => moveNext(true)); // toggles btns + moves next
+    nextBtnGallery.addEventListener("click", () => moveNext()); // moves next only
+    prevGallery.addEventListener("click", () => movePrev(true)); // toggles btns + moves prev
+    prevBtnGallery.addEventListener("click", () => movePrev()); // moves prev only
+
+    // Initialize
+    updateActiveHeightSlide();
+    window.addEventListener("resize", updateActiveHeightSlide);
