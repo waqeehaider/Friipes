@@ -321,7 +321,7 @@ prevBtn.addEventListener('click', () => {
 
       let activeIndex = window.innerWidth <= 768 ? 0 : 1;
       const activeSlide = GalleryTrack.children[activeIndex];
-      if (activeSlide) activeSlide.style.height = "606px";
+      if (activeSlide) activeSlide.style.height = "532px";
     }
 
     // -----------------------
@@ -390,3 +390,137 @@ prevBtn.addEventListener('click', () => {
     // Initialize
     updateActiveHeightSlide();
     window.addEventListener("resize", updateActiveHeightSlide);
+
+
+
+
+
+    // Customer Carousel 
+
+
+      const nextCustomer = document.querySelector(".next-customer");
+      const prevBtnCustomer = document.querySelector(".prevBtnCustomer");
+      const nextBtnCustomer = document.querySelector(".nextBtnCustomer");
+      const prevCustomer = document.querySelector(".prev-customer");
+      const CustomerTrack = document.querySelector(".customer-carousel-track");
+
+      nextCustomer.style.transform = "rotate(180deg)";
+      prevBtnCustomer.style.transform = "rotate(180deg)";
+      prevBtnCustomer.style.display = "none";
+      nextBtnCustomer.style.display = "none";
+
+      nextCustomer.addEventListener("click", () => {
+        nextCustomer.style.display = "none";
+        nextBtnCustomer.style.display = "block";
+        prevCustomer.style.display = "block";
+        prevBtnCustomer.style.display = "none";
+      });
+
+      prevCustomer.addEventListener("click", () => {
+        prevCustomer.style.display = "none";
+        prevBtnCustomer.style.display = "block";
+        nextBtnCustomer.style.display = "none";
+        nextCustomer.style.display = "block";
+      });
+
+      function getCustomerSlideWidth() {
+        return CustomerTrack.querySelector(".customer-slide").offsetWidth;
+      }
+
+      let isMoving4 = false;
+
+      // ✅ NEXT button
+      nextCustomer.addEventListener("click", () => {
+        if (isMoving4) return;
+        isMoving4 = true;
+
+        const slideWidth = getCustomerSlideWidth();
+        CustomerTrack.style.transform = `translateX(-${slideWidth}px)`;
+        CustomerTrack.style.transition = "transform 0.5s ease-in-out";
+
+        CustomerTrack.addEventListener(
+          "transitionend",
+          () => {
+            CustomerTrack.appendChild(CustomerTrack.firstElementChild); // ✅ fixed reference
+            CustomerTrack.style.transition = "none";
+            CustomerTrack.style.transform = "translateX(0)";
+            isMoving4 = false;
+          },
+          { once: true }
+        );
+      });
+
+      nextBtnCustomer.addEventListener("click", () => {
+        if (isMoving4) return;
+        isMoving4 = true;
+
+        const slideWidth = getCustomerSlideWidth();
+        CustomerTrack.style.transform = `translateX(-${slideWidth}px)`;
+        CustomerTrack.style.transition = "transform 0.5s ease-in-out";
+
+        CustomerTrack.addEventListener(
+          "transitionend",
+          () => {
+            CustomerTrack.appendChild(CustomerTrack.firstElementChild); // ✅ fixed reference
+            CustomerTrack.style.transition = "none";
+            CustomerTrack.style.transform = "translateX(0)";
+            isMoving4 = false;
+          },
+          { once: true }
+        );
+      });
+
+      // ✅ PREV button
+      prevCustomer.addEventListener("click", () => {
+        if (isMoving4) return;
+        isMoving4 = true;
+
+        const slideWidth = getCustomerSlideWidth();
+        CustomerTrack.insertBefore(
+          CustomerTrack.lastElementChild,
+          CustomerTrack.firstElementChild
+        );
+
+        CustomerTrack.style.transition = "none";
+        CustomerTrack.style.transform = `translateX(-${slideWidth}px)`;
+
+        requestAnimationFrame(() => {
+          CustomerTrack.style.transition = "transform 0.5s ease-in-out";
+          CustomerTrack.style.transform = "translateX(0)";
+        });
+
+        CustomerTrack.addEventListener(
+          "transitionend",
+          () => {
+            isMoving4 = false;
+          },
+          { once: true }
+        );
+      });
+
+      prevBtnCustomer.addEventListener("click", () => {
+        if (isMoving4) return;
+        isMoving4 = true;
+
+        const slideWidth = getCustomerSlideWidth();
+        CustomerTrack.insertBefore(
+          CustomerTrack.lastElementChild,
+          CustomerTrack.firstElementChild
+        );
+
+        CustomerTrack.style.transition = "none";
+        CustomerTrack.style.transform = `translateX(-${slideWidth}px)`;
+
+        requestAnimationFrame(() => {
+          CustomerTrack.style.transition = "transform 0.5s ease-in-out";
+          CustomerTrack.style.transform = "translateX(0)";
+        });
+
+        CustomerTrack.addEventListener(
+          "transitionend",
+          () => {
+            isMoving4 = false;
+          },
+          { once: true }
+        );
+      });

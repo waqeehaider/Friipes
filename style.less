@@ -92,7 +92,7 @@ width: 90px !important;
 /* transition: transform 0.4s ease; */
     justify-content: center;
     width: 100%;
-    flex: 0 0 29%;
+    flex: 0 0 30%;
 /* padding: 30px; */
 }
 .slider img {
@@ -305,7 +305,7 @@ z-index: 2;
       @media screen and (min-width: 992px) {
         .custom-gallery-position {
           position: absolute;
-          margin-left: 5rem;
+          margin-left: 35rem;
           z-index: 1;
         }
       }
@@ -315,7 +315,7 @@ z-index: 2;
 
       // logo carousel 
 
-            .logo-carousel {
+          .logo-carousel {
         width: 1200px;
         overflow: hidden;
       }
@@ -329,7 +329,7 @@ z-index: 2;
       }
 
       .logo-slide {
-        flex: 0 0 10%;
+        flex: 0 0 15%;
       }
 
       .logo-slide img {
@@ -370,5 +370,73 @@ z-index: 2;
       @media screen and (max-width: 572px) {
         .logo-carousel {
           width: 400px;
+        }
+      }
+
+
+
+
+
+      // Customer Carousel 
+
+
+
+         .customer-carousel {
+        max-width: 1400px;
+        /* overflow: hidden; */
+      }
+
+      .customer-carousel-track {
+        display: flex;
+        /* transition: transform 0.5s ease-in-out; */
+        /* align-items: stretch; */
+      }
+      .customer-slide {
+        justify-content: center;
+        width: 100%;
+        flex: 0 0 34%;
+        background-color: #10375c;
+      }
+      .customer-slide img {
+        width: 100%;
+      }
+      .customer-marg {
+        margin-top: 13.4rem;
+      }
+      @media screen and (min-width: 992px) {
+        .customer-column-marg {
+          margin-left: 3.3rem;
+        }
+      }
+      @media screen and (max-width: 992px) {
+        .customer-carousel {
+          width: 900px;
+          overflow: hidden;
+        }
+        .customer-slide {
+          display: flex;
+          flex: 0 0 50% !important;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        .customer-carousel {
+          width: 500px;
+          overflow: hidden;
+        }
+        .customer-slide {
+          display: flex;
+          flex: 0 0 100% !important;
+        }
+        .customer-slide img {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 572px) {
+        .customer-carousel {
+          width: 400px;
+          overflow: hidden;
+        }
+        .customer-slide img {
+          width: 100%;
         }
       }
