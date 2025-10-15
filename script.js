@@ -327,9 +327,10 @@ prevBtn.addEventListener('click', () => {
       if (activeSlide) activeSlide.style.height = "532px";
     }
 
-    // -----------------------
-    // Function: Move NEXT ▶️
-    // -----------------------
+    // Function: Move NEXT 
+
+
+
     function moveNext(toggleButtons = false) {
       if (isMoving3) return;
       isMoving3 = true;
@@ -351,9 +352,9 @@ prevBtn.addEventListener('click', () => {
       );
     }
 
-    // -----------------------
-    // Function: Move PREV ◀️
-    // -----------------------
+    // Function: Move PREV
+
+
     function movePrev(toggleButtons = false) {
       if (isMoving3) return;
       isMoving3 = true;
@@ -567,4 +568,3 @@ cardBtns.forEach((Cardbtn) => {
 
 
 
-console.log("Hello")
