@@ -1,3 +1,6 @@
+console.log("✅ script.js is loaded and running");
+
+
 const arrow = document.querySelector('.rotArrow');
 arrow.style.transform = 'rotate(180deg)';
 
@@ -564,3 +567,4 @@ cardBtns.forEach((Cardbtn) => {
 
 
 
+console.log("Hello")
