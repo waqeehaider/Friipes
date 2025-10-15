@@ -335,7 +335,8 @@ buttons.forEach((btn, i) => {
 
       let activeIndex = window.innerWidth <= 768 ? 0 : 1;
       const activeSlide = GalleryTrack.children[activeIndex];
-      if (activeSlide) activeSlide.style.height = "532px";
+      if (activeSlide)
+         activeSlide.style.height = "532px";
     }
 
     // Function: Move NEXT 
@@ -544,18 +545,18 @@ buttons.forEach((btn, i) => {
 
       //Help Center Cards
 
-
 const cardBtns = document.querySelectorAll(".cardBtn");
+const cardBodies = document.querySelectorAll(".Help-section-card");
 
 cardBtns.forEach((Cardbtn) => {
-  const card = Cardbtn.closest(".card"); // find the parent card
+  const card = Cardbtn.closest(".card"); // parent card
   const icon = Cardbtn.querySelector(".btnText");
 
   // Default styles
   Cardbtn.style.background = "#FF5722";
   icon.style.color = "white";
 
-  Cardbtn.addEventListener("mouseenter", () => {
+  function applyHoverEffect() {
     Cardbtn.style.background = "white";
     icon.style.color = "#FF5722";
     Cardbtn.style.boxShadow = "8px 8px 34px #DD2C003D";
@@ -564,18 +565,35 @@ cardBtns.forEach((Cardbtn) => {
       card.style.background = "#FF5722";
       card.style.color = "white";
     }
-  });
+  }
 
-  Cardbtn.addEventListener("mouseleave", () => {
+  function removeHoverEffect() {
     Cardbtn.style.background = "#FF5722";
     icon.style.color = "white";
+    Cardbtn.style.boxShadow = "none";
 
     if (card) {
       card.style.background = "";
       card.style.color = "";
     }
-  });
+  }
+
+  // Hover on button
+  Cardbtn.addEventListener("mouseenter", applyHoverEffect);
+  Cardbtn.addEventListener("mouseleave", removeHoverEffect);
+
+  // Hover on card body (same effect)
+  if (card) {
+    card.addEventListener("mouseenter", applyHoverEffect);
+    card.addEventListener("mouseleave", removeHoverEffect);
+  }
 });
 
 
 
+
+// Spaces Carousel Button
+
+      const SpaceBtn = document.querySelector(".space-btn");
+      const BtnContent = document.querySelector(".btnContent");
+      SpaceBtn.addEventListener("mouseenter", () => {});

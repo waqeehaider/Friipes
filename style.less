@@ -81,27 +81,69 @@ width: 90px !important;
 // space carousel
 
 
-.carousel-space {
-    width: 1200px;
-    overflow-x: hidden;
-}
+ .carousel-space {
+        width: 1200px;
+        overflow-x: hidden;
+      }
 
-.carousel-track {
-    display: flex;
-    /* transition: transform 0.5s ease-in-out; */
-    align-items: stretch;
+      .carousel-track {
+        display: flex;
+        /* transition: transform 0.5s ease-in-out; */
+        align-items: stretch;
+      }
+      .slider {
+        /* transition: transform 0.4s ease; */
+        justify-content: center;
+        width: 100%;
+        flex: 0 0 30.6%;
+        /* padding: 30px; */
+      }
+      .slider img {
+        width: 100%;
+      }
 
-}
-.slider {
-/* transition: transform 0.4s ease; */
-    justify-content: center;
-    width: 100%;
-    flex: 0 0 30%;
-/* padding: 30px; */
-}
-.slider img {
-    width: 100%;
-}
+      .background-lines {
+        background-image: url(/images/Pattern.svg);
+        background-size: cover;
+      }
+      /* .slide.active {
+transform: scale(1.2);
+z-index: 2;
+} */
+
+      @media screen and (max-width: 992px) {
+        .carousel-space {
+          width: 600px;
+          overflow: hidden;
+        }
+        .slider {
+          display: flex;
+          flex: 0 0 44% !important;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        .carousel-space {
+          width: 500px;
+          overflow: hidden;
+        }
+
+        .slider {
+          display: flex;
+          flex: 0 0 100% !important;
+        }
+        .slider img {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 572px) {
+        .carousel-space {
+          width: 400px;
+          overflow: hidden;
+        }
+        .slider img {
+          width: 100%;
+        }
+      }
 
 
 .btnContent {
