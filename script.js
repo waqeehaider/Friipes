@@ -524,3 +524,43 @@ prevBtn.addEventListener('click', () => {
           { once: true }
         );
       });
+
+
+
+      //Help Center Cards
+
+
+const cardBtns = document.querySelectorAll(".cardBtn");
+
+cardBtns.forEach((Cardbtn) => {
+  const card = Cardbtn.closest(".card"); // find the parent card
+  const icon = Cardbtn.querySelector(".btnText");
+
+  // Default styles
+  Cardbtn.style.background = "#FF5722";
+  icon.style.color = "white";
+
+  Cardbtn.addEventListener("mouseenter", () => {
+    Cardbtn.style.background = "white";
+    icon.style.color = "#FF5722";
+    Cardbtn.style.boxShadow = "8px 8px 34px #DD2C003D";
+
+    if (card) {
+      card.style.background = "#FF5722";
+      card.style.color = "white";
+    }
+  });
+
+  Cardbtn.addEventListener("mouseleave", () => {
+    Cardbtn.style.background = "#FF5722";
+    icon.style.color = "white";
+
+    if (card) {
+      card.style.background = "";
+      card.style.color = "";
+    }
+  });
+});
+
+
+
