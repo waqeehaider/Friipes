@@ -174,107 +174,118 @@ prevBtn.addEventListener('click', () => {
 
 
 
-     const num = document.querySelector(".indicator-num");
-    num.style.transform = "rotate(270deg)";
-    num.style.transformOrigin = "center";
+    const num = document.querySelector(".indicator-num");
+num.style.transform = "rotate(270deg)";
+num.style.transformOrigin = "center";
 
-    const trackFacility = document.querySelector(".carousel-facility");
-    const indicators = document.querySelectorAll(".custom-indicator");
-    const buttons = document.querySelectorAll(".indicate-btn");
-    let isMoving2 = false;
+const trackFacility = document.querySelector(".carousel-facility");
+const indicators = document.querySelectorAll(".custom-indicator");
+const buttons = document.querySelectorAll(".indicate-btn");
+let isMoving2 = false;
 
-    function getSlidersWidth() {
-      return trackFacility.querySelector(".slide-facility").offsetWidth;
+function getSlideHeight() {
+  return trackFacility.querySelector(".slide-facility").offsetHeight;
+}
+
+const totalSlides = indicators.length;
+let currentIndex = 0;
+updateIndicators();
+
+function updateIndicators() {
+  indicators.forEach((btn, i) => {
+    btn.classList.toggle("active", i === currentIndex);
+  });
+  buttons.forEach((btn, i) => {
+    btn.classList.toggle("active", i === currentIndex);
+  });
+
+  const numText = document.querySelector(".indicator-num p");
+  numText.innerHTML = `${String(currentIndex + 1).padStart(
+    2,
+    "0"
+  )}/ <span class="text-secondary">${String(totalSlides).padStart(
+    2,
+    "0"
+  )}</span>`;
+}
+
+// 👉 Smooth vertical slide transition (no flicker)
+function goToSlide(i) {
+  if (isMoving2 || i === currentIndex) return;
+  isMoving2 = true;
+
+  const slideHeight = getSlideHeight();
+  let diff = i - currentIndex;
+
+  if (diff > 0) {
+    // --- Move DOWN (Next)
+    const clones = [];
+    for (let j = 0; j < diff; j++) {
+      clones.push(trackFacility.children[j].cloneNode(true));
     }
+    clones.forEach(clone => trackFacility.appendChild(clone));
 
-    const totalSlides = indicators.length;
-    let currentIndex = 0;
-    updateIndicators();
+    requestAnimationFrame(() => {
+      trackFacility.style.transition = "transform 0.5s ease-in-out";
+      trackFacility.style.transform = `translateY(-${slideHeight * diff}px)`;
+    });
 
-    function updateIndicators() {
-      indicators.forEach((btn, i) => {
-        btn.classList.toggle("active", i === currentIndex);
-      });
-      buttons.forEach((btn, i) => {
-        btn.classList.toggle("active", i === currentIndex);
-      });
-
-      const numText = document.querySelector(".indicator-num p");
-      numText.innerHTML = `${String(currentIndex + 1).padStart(
-        2,
-        "0"
-      )}/ <span class="text-secondary">${String(totalSlides).padStart(
-        2,
-        "0"
-      )}</span>`;
-    }
-
-    // 👉 Shared function for movement
-    function goToSlide(i) {
-      if (isMoving2 || i === currentIndex) return;
-      isMoving2 = true;
-
-      const slideWidth = getSlidersWidth();
-      let diff = i - currentIndex;
-
-      if (diff > 0) {
-        trackFacility.style.transition = "transform 0.5s ease-in-out";
-        trackFacility.style.transform = `translateY(-${slideWidth * diff}px)`;
-
-        trackFacility.addEventListener(
-          "transitionend",
-          () => {
-            for (let j = 0; j < diff; j++) {
-              trackFacility.appendChild(trackFacility.firstElementChild);
-            }
-            trackFacility.style.transition = "none";
-            trackFacility.style.transform = "translateY(0)";
-            currentIndex = i;
-            updateIndicators();
-            isMoving2 = false;
-          },
-          { once: true }
-        );
-      } else {
-        diff = Math.abs(diff);
+    trackFacility.addEventListener(
+      "transitionend",
+      () => {
         for (let j = 0; j < diff; j++) {
-          trackFacility.insertBefore(
-            trackFacility.lastElementChild,
-            trackFacility.firstElementChild
-          );
+          trackFacility.removeChild(trackFacility.firstElementChild);
         }
         trackFacility.style.transition = "none";
-        trackFacility.style.transform = `translateY(-${slideWidth * diff}px)`;
-
-        requestAnimationFrame(() => {
-          trackFacility.style.transition = "transform 0.5s ease-in-out";
-          trackFacility.style.transform = "translateY(0)";
-        });
-
-        trackFacility.addEventListener(
-          "transitionend",
-          () => {
-            currentIndex = i;
-            updateIndicators();
-            isMoving2 = false;
-          },
-          { once: true }
-        );
-      }
+        trackFacility.style.transform = "translateY(0)";
+        currentIndex = i;
+        updateIndicators();
+        isMoving2 = false;
+      },
+      { once: true }
+    );
+  } else {
+    // --- Move UP (Previous)
+    diff = Math.abs(diff);
+    const total = trackFacility.children.length;
+    const clones = [];
+    for (let j = total - diff; j < total; j++) {
+      clones.push(trackFacility.children[j].cloneNode(true));
     }
-
-    // 👉 Click events for indicators and buttons
-    indicators.forEach((btn, i) => {
-      btn.addEventListener("click", () => goToSlide(i));
-    });
-    buttons.forEach((btn, i) => {
-      btn.addEventListener("click", () => goToSlide(i));
+    clones.reverse().forEach(clone => {
+      trackFacility.insertBefore(clone, trackFacility.firstElementChild);
     });
 
+    trackFacility.style.transition = "none";
+    trackFacility.style.transform = `translateY(-${slideHeight * diff}px)`;
 
+    requestAnimationFrame(() => {
+      trackFacility.style.transition = "transform 0.5s ease-in-out";
+      trackFacility.style.transform = "translateY(0)";
+    });
 
+    trackFacility.addEventListener(
+      "transitionend",
+      () => {
+        for (let j = 0; j < diff; j++) {
+          trackFacility.removeChild(trackFacility.lastElementChild);
+        }
+        currentIndex = i;
+        updateIndicators();
+        isMoving2 = false;
+      },
+      { once: true }
+    );
+  }
+}
 
-
+// 👉 Click events
+indicators.forEach((btn, i) => {
+  btn.addEventListener("click", () => goToSlide(i));
+});
+buttons.forEach((btn, i) => {
+  btn.addEventListener("click", () => goToSlide(i));
+});
 
 
     // Gallery Slider
