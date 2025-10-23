@@ -16,6 +16,11 @@
   }
 }
 
+.orange-btn {
+  background: @btnClr;
+  color: white;
+  border-color: @btnClr !important;
+}
 .carousel-indicators [data-bs-target] {
   width: 16px !important;
 }
@@ -146,18 +151,62 @@ z-index: 2;
       }
 
 
-.btnContent {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  display: none;
+.customBtn {
+  width: 72px;
+  height: 72px;
+  background-color: #ff5722;
+  transition: width 0.4s ease, background-color 0.3s ease;
+  white-space: nowrap;
 }
 
-.customBtn:hover .btnContent {
+.mainBtn:hover .checkArrow{
+  display: none;
+}
+.btnContent {
+  opacity: 0;
+  transform: translateX(20px);
+  // transition: opacity 0.3s ease-in-out, transform 0.3s ease;
+  // pointer-events: none;
+}
+
+/* Active (hovered) state */
+.customBtn.active {
+  width: 240px; /* smoothly expands width */
+}
+.customBtn.active .btnContent {
   opacity: 1;
-  visibility: visible;
-  display: block;
-  transition: opacity 0.3s ease;
+}
+
+.btnWidth {
+  width: 40px;               /* default width */
+  height: 4px;
+  background: #dfdfdf;       /* inactive color */
+  border: none;              /* remove default button border */
+  outline: none;             /* remove focus outline */
+  transition: all 0.3s ease; /* smooth width/color change */
+  cursor: pointer;
+  padding: 0;                /* prevent spacing */
+}
+
+.btnWidth.active {
+  background: @btnClr; /* use CSS variable or fallback */
+  width: 40px;                        /* same width (you can enlarge if you want) */
+}
+
+.btnWidth2 {
+  width: 40px;               /* default width */
+  height: 4px;
+  background: #dfdfdf;       /* inactive color */
+  border: none;              /* remove default button border */
+  outline: none;             /* remove focus outline */
+  transition: all 0.3s ease; /* smooth width/color change */
+  cursor: pointer;
+  padding: 0;                /* prevent spacing */
+}
+
+.btnWidth2.active {
+  background: @btnClr; /* use CSS variable or fallback */
+  width: 40px;                        /* same width (you can enlarge if you want) */
 }
 
 
@@ -213,7 +262,7 @@ z-index: 2;
 
 
 .carousel-facilities {
-  width: 100%;
+  // width: 729px;
   height: 520px; /* 👈 give it a visible height */
   overflow: hidden;
 }
@@ -249,7 +298,7 @@ z-index: 2;
       }
       @media screen and (max-width: 992px) {
         .carousel-facilities {
-          width: 600px;
+          width: 800px;
           overflow: hidden;
         }
         .slide-facility {
@@ -259,12 +308,15 @@ z-index: 2;
       }
       @media screen and (max-width: 768px) {
         .carousel-facilities {
-          width: 500px;
+          margin-top: 2rem;
+          width: 600px;
+          height: 300px;
           overflow: hidden;
         }
         .slide-facility {
           display: flex;
           flex: 0 0 100% !important;
+          height: 100%;
         }
         .slide-facility img {
           width: 100%;
@@ -272,12 +324,25 @@ z-index: 2;
       }
       @media screen and (max-width: 572px) {
         .carousel-facilities {
-          width: 400px;
+          width: 430px;
           overflow: hidden;
+          height: 270px;
         }
         .slide-facility img {
           width: 100%;
         }
+        
+      }
+            @media screen and (max-width: 320px) {
+        .carousel-facilities {
+          width: 400px;
+          overflow: hidden;
+          height: 200px;
+        }
+        .slide-facility img {
+          width: 100%;
+        }
+        
       }
 
       .custom-indicator.active {
@@ -319,7 +384,7 @@ z-index: 2;
         display: flex;
         align-items: end;
         justify-content: space-between;
-        /* justify-content: center; */
+        // justify-content: center;
       }
 
       .gallery-slide {
@@ -374,6 +439,9 @@ z-index: 2;
           margin-left: 35rem;
           z-index: 1;
         }
+        .gallery-carousel-track {
+        justify-content: center;
+      }
       }
 
 
@@ -454,8 +522,6 @@ z-index: 2;
 
       .customer-carousel-track {
         display: flex;
-        /* transition: transform 0.5s ease-in-out; */
-        /* align-items: stretch; */
       }
       .customer-slide {
         justify-content: center;

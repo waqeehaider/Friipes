@@ -1,0 +1,227 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css"
+    />
+
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less@4.2.0/dist/less.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="container-fluid p-0 overflow-hidden d-flex mt-lg-5 pt-lg-5 flex-column align-items-center"
+    >
+      <div class="row justify-content-end">
+        <div class="col-12 p-5 p-lg-0 bg-white">
+          <div class="d-flex align-items-center gap-3">
+            <h5>Frispes gallery</h5>
+            <img src="/images/Rectangle 1 (1).svg" alt="" />
+          </div>
+          <div>
+            <h1 class="fw-bold customText">
+              Immersive beautiful <br />
+              co-working space gallery
+            </h1>
+          </div>
+          <div
+            class="d-flex justify-content-center justify-content-lg-start gap-4 mt-5"
+          >
+            <div>
+              <img
+                class="img-fluid arrow-point prevBtnGallery"
+                src="/images/Group 1.svg"
+                alt=""
+              />
+              <img
+                class="img-fluid arrow-point prev-gallery"
+                src="/images/Group 2.svg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="img-fluid arrow-point next rotArrowGallery"
+                src="/images/Group 2.svg"
+                alt=""
+              />
+              <img
+                class="img-fluid arrow-point nextBtnGallery"
+                src="/images/Group 1.svg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid d-flex justify-content-center p-0">
+        <div class="gallery-carousel p-4 p-sm-0">
+          <div class="gallery-carousel-track gap-4">
+            <div class="gallery-slide">
+              <img class="" src="images/image 1 (1).svg" />
+            </div>
+            <div class="gallery-slide">
+              <img class="" src="images/office.svg" />
+            </div>
+            <div class="gallery-slide">
+              <img class="" src="images/image 3.svg" />
+            </div>
+            <div class="gallery-slide">
+              <img class="" src="images/image 4.svg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const galleryArrowright = document.querySelector(".rotArrowGallery");
+      const prevBtnGallery = document.querySelector(".prevBtnGallery");
+      const nextBtnGallery = document.querySelector(".nextBtnGallery");
+      const prevGallery = document.querySelector(".prev-gallery");
+      const GalleryTrack = document.querySelector(".gallery-carousel-track");
+
+      // Initial setup
+      galleryArrowright.style.transform = "rotate(180deg)";
+      prevBtnGallery.style.transform = "rotate(180deg)";
+      prevBtnGallery.style.display = "none";
+      nextBtnGallery.style.display = "none";
+
+      // Toggle arrows visibility
+      galleryArrowright.addEventListener("click", () => {
+        galleryArrowright.style.display = "none";
+        nextBtnGallery.style.display = "block";
+        prevBtnGallery.style.display = "none";
+        prevGallery.style.display = "block";
+      });
+
+      prevGallery.addEventListener("click", () => {
+        prevGallery.style.display = "none";
+        prevBtnGallery.style.display = "block";
+        nextBtnGallery.style.display = "none";
+        galleryArrowright.style.display = "block";
+      });
+
+      let isMoving3 = false;
+
+      function getGallerySlideWidth() {
+        return GalleryTrack.querySelector(".gallery-slide").offsetWidth;
+      }
+
+      // Highlight active slide only
+      function updateActiveHeightSlide() {
+        Array.from(GalleryTrack.children).forEach((slide) => {
+          slide.style.transition =
+            // "height 0.4s ease, transform 0.4s ease, opacity 0.4s ease";
+            slide.style.height = "297.12px";
+          // slide.style.opacity = "0.6";
+          slide.style.transform = "scale(0.95)";
+        });
+
+        const activeIndex = window.innerWidth <= 768 ? 0 : 1;
+        const activeSlide = GalleryTrack.children[activeIndex];
+        if (activeSlide) {
+          activeSlide.style.height = "532px";
+          // activeSlide.style.opacity = "1";
+          activeSlide.style.transform = "scale(1)";
+        }
+      }
+
+      // Smooth move next
+      function moveNext(toggleButtons = false) {
+        if (isMoving3) return;
+        isMoving3 = true;
+
+        const slideWidth = getGallerySlideWidth();
+        const firstSlide = GalleryTrack.firstElementChild;
+        const clone = firstSlide.cloneNode(true);
+
+        // Shrink only current active before moving
+        const activeIndex = window.innerWidth <= 768 ? 0 : 1;
+        const activeSlide = GalleryTrack.children[activeIndex];
+        if (activeSlide) {
+          activeSlide.style.transform = "scale(1)";
+          // activeSlide.style.opacity = "0.5";
+        }
+
+        // Small delay for smoother feel
+        setTimeout(() => {
+          GalleryTrack.appendChild(clone);
+          GalleryTrack.style.transition = "transform 0.6s ease-in-out";
+          GalleryTrack.style.transform = `translateX(-${slideWidth}px)`;
+        }, 150);
+
+        GalleryTrack.addEventListener(
+          "transitionend",
+          () => {
+            GalleryTrack.style.transition = "none";
+            GalleryTrack.style.transform = "translateX(0)";
+            GalleryTrack.removeChild(firstSlide);
+            updateActiveHeightSlide();
+            isMoving3 = false;
+          },
+          { once: true }
+        );
+      }
+
+      // Smooth move prev
+      function movePrev(toggleButtons = false) {
+        if (isMoving3) return;
+        isMoving3 = true;
+
+        const slideWidth = getGallerySlideWidth();
+        const lastSlide = GalleryTrack.lastElementChild;
+        const clone = lastSlide.cloneNode(true);
+
+        // Shrink only current active before moving
+        const activeIndex = window.innerWidth <= 768 ? 0 : 1;
+        const activeSlide = GalleryTrack.children[activeIndex];
+        if (activeSlide) {
+          activeSlide.style.transform = "scale(1)";
+          // activeSlide.style.opacity = "0.5";
+        }
+
+        GalleryTrack.insertBefore(clone, GalleryTrack.firstElementChild);
+        GalleryTrack.style.transition = "none";
+        GalleryTrack.style.transform = `translateX(-${slideWidth}px)`;
+
+        requestAnimationFrame(() => {
+          GalleryTrack.style.transition = "transform 0.6s ease-in-out";
+          GalleryTrack.style.transform = "translateX(0)";
+        });
+
+        GalleryTrack.addEventListener(
+          "transitionend",
+          () => {
+            GalleryTrack.removeChild(GalleryTrack.lastElementChild);
+            updateActiveHeightSlide();
+            isMoving3 = false;
+          },
+          { once: true }
+        );
+      }
+
+      // Attach controls
+      galleryArrowright.addEventListener("click", () => moveNext(true));
+      nextBtnGallery.addEventListener("click", () => moveNext());
+      prevGallery.addEventListener("click", () => movePrev(true));
+      prevBtnGallery.addEventListener("click", () => movePrev());
+
+      // Init
+      updateActiveHeightSlide();
+      window.addEventListener("resize", updateActiveHeightSlide);
+    </script>
+  </body>
+</html>
